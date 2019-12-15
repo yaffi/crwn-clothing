@@ -3,6 +3,8 @@ import React from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custombutton/custombutton-component';
 
+import { signInWithGoogle } from '../../firebase/firebase.utils';
+
 import './sign-in.styles.scss';
 
 class SignIn extends React.Component {
@@ -30,25 +32,32 @@ class SignIn extends React.Component {
     render() {
         return (
           <div className="sign-in">
-            <form onSubmit={this.handleSubmit}>
-              <FormInput 
-                name="email" 
-                type="email" 
-                label='email' 
-                value={this.state.email} 
-                onChange={this.handleChange} 
+            <h2 className="title"> I already have an account </h2>
+            <span>Sign in with your email and password</span>
+            <form className='sign-in-form' onSubmit={this.handleSubmit}>
+              <FormInput
+                name="email"
+                type="email"
+                label="email"
+                value={this.state.email}
+                onChange={this.handleChange}
                 required
               />
-              <FormInput 
-                name="password" 
-                type="password" 
-                label='passsword' 
-                value={this.state.password} 
-                onChange={this.handleChange} 
+              <FormInput
+                name="password"
+                type="password"
+                label="passsword"
+                value={this.state.password}
+                onChange={this.handleChange}
                 required
               />
-
-              <CustomButton type='submit'> sign in </CustomButton>
+              <div className="buttons">
+                <CustomButton type="submit"> sign in </CustomButton>
+                <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+                  {" "}
+                  Google{" "}
+                </CustomButton>
+              </div>
             </form>
           </div>
         );
