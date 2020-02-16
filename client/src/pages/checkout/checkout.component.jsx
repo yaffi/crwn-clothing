@@ -1,56 +1,58 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
-import {createStructuredSelector} from 'reselect';
+import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
-import CheckoutItem from '../../components/checkout-item/checkout-item.component';
-
-import { selectCartItems, selectCartItemsTotal } from '../../redux/cart/cart.selectors';
+import {
+  selectCartItems,
+  selectCartTotal
+} from "../../redux/cart/cart.selectors";
 
 import {
   CheckoutPageContainer,
-  CheckoutHeader,
-  HeaderBlock,
-  ItemTotal,
-  StripeCheckoutButtonContainer,
-  TestWarning
-} from './checkout.styles';
+  CheckoutHeaderContainer,
+  HeaderBlockContainer,
+  TotalContainer,
+  WarningContainer
+} from "./checkout.styles";
 
 const CheckoutPage = ({ cartItems, total }) => (
   <CheckoutPageContainer>
-    <CheckoutHeader>
-      <HeaderBlock>
+    <CheckoutHeaderContainer>
+      <HeaderBlockContainer>
         <span>Product</span>
-      </HeaderBlock>
-      <HeaderBlock>
+      </HeaderBlockContainer>
+      <HeaderBlockContainer>
         <span>Description</span>
-      </HeaderBlock>
-      <HeaderBlock>
+      </HeaderBlockContainer>
+      <HeaderBlockContainer>
         <span>Quantity</span>
-      </HeaderBlock>
-      <HeaderBlock>
+      </HeaderBlockContainer>
+      <HeaderBlockContainer>
         <span>Price</span>
-      </HeaderBlock>
-      <HeaderBlock>
+      </HeaderBlockContainer>
+      <HeaderBlockContainer>
         <span>Remove</span>
-      </HeaderBlock>
-    </CheckoutHeader>
+      </HeaderBlockContainer>
+    </CheckoutHeaderContainer>
     {cartItems.map(cartItem => (
       <CheckoutItem key={cartItem.id} cartItem={cartItem} />
     ))}
-    <ItemTotal> {`TOTAL $${total}`}</ItemTotal>
-    <TestWarning>
+    <TotalContainer>TOTAL: ${total}</TotalContainer>
+    <WarningContainer>
       *Please use the following test credit card for payments*
       <br />
       4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
-    </TestWarning>
-    <StripeCheckoutButtonContainer price={total} />
+    </WarningContainer>
+    <StripeCheckoutButton price={total} />
   </CheckoutPageContainer>
 );
 
 const mapStateToProps = createStructuredSelector({
-  cartItems:selectCartItems,
-  total: selectCartItemsTotal
-})
+  cartItems: selectCartItems,
+  total: selectCartTotal
+});
 
 export default connect(mapStateToProps)(CheckoutPage);
