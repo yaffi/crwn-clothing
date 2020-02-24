@@ -1,15 +1,14 @@
 # ポートフォリオ(ECサイト)
 
-https://yaffi.herokuapp.com/
+https://yaffi.herokuapp.com/ <br>
 
 # ポートフォリオ概要
-ReactとFirebaseを用いてECサイトを作成いたしました。
-
-# 実装した機能
-firebase authenticationを用いたログイン認証<br>
-決済API(Stripe)を用いての決済(テストモード)
+ReactとFirebaseを用いてECサイトを作成いたしました。<br>
 
 # 使用した技術
-- React
+- フロント
+  - React
   - Redux
-- Firebase
+- バックエンド
+  - Firebase Authenticationを用いたログイン認証
+  - Firebase Database
